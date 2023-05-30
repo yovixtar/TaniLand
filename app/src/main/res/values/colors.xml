@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg_topAuthPage">#678C67</color>
+    <color name="ic_taniland_background">#345734</color>
+    <color name="textcolor_normal">#504F54</color>
+    <color name="textcolor_body">#27272C</color>
+    <color name="textcolor_title">#504F54</color>
+    <color name="textcolor_heading">#504F54</color>
+    <color name="grey_main_border">#9F9F9F</color>
+    <color name="primary_teal">#75B49C</color>
+    <color name="primary_green">#345834</color>
+    <color name="secondary_purple">#7A5E7E</color>
+    <color name="ternary_yellow">#FBD685</color>
+    <color name="dark">#27272C</color>
+    <color name="accient">#FF5E5E</color>
+    <color name="neutral">#F3F1EF</color>
+    <color name="green_variant">#4BA064</color>
+</resources>
