@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.ykstar.bangkit.taniland.R
-import com.ykstar.bangkit.taniland.adapters.Lahan
 import com.ykstar.bangkit.taniland.databinding.ActivityDetailLahanBinding
 import com.ykstar.bangkit.taniland.databinding.PlanTanamDetailLahanBinding
 import com.ykstar.bangkit.taniland.databinding.PopupRekomendasiTanamBinding
@@ -35,15 +34,6 @@ class DetailLahanActivity : AppCompatActivity() {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        val lahan =
-            Lahan(R.drawable.bibit, "Lahan 1", "Desa Cangak, Kecamatan Bodeh", "8", "Jagung")
-
-        binding.lahanItem.itemLahanGambar.setImageResource(lahan.imageResId)
-        binding.lahanItem.itemLahanNama.text = lahan.name
-        binding.lahanItem.itemLahanAlamat.text = lahan.alamat
-        binding.lahanItem.itemLahanLuas.text = getString(R.string.item_lahan_luas, lahan.area)
-        binding.lahanItem.itemLahanBibit.text =
-            getString(R.string.item_lahan_bibit, lahan.seed)
 
         // Set onClickListener untuk tombol rekomendasi tanam
         preTanamDetailLahanBinding.buttonRekomendasiTanam.setOnClickListener {

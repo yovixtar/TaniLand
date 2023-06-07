@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@+id/navigation_home"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.ykstar.bangkit.taniland.pages.homepage.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_lahan"
+            app:destination="@id/navigation_lahan"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_lahan"
+        android:name="com.ykstar.bangkit.taniland.pages.lahan.LahanFragment"
+        android:label="@string/lahan"
+        tools:layout="@layout/fragment_lahan" />
+
+    <fragment
+        android:id="@+id/navigation_artikel"
+        android:name="com.ykstar.bangkit.taniland.pages.artikel.ArtikelFragment"
+        android:label="@string/artikel"
+        tools:layout="@layout/fragment_artikel" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.ykstar.bangkit.taniland.pages.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

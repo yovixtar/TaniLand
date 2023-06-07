@@ -80,19 +80,6 @@
                 app:chipStrokeColor="@android:color/transparent"
                 app:chipCornerRadius="50dp" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/item_lahan_bibit"
-                style="@style/BodyTiny"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ternary_yellow"
-                android:clickable="false"
-                android:focusable="false"
-                android:text="@string/item_lahan_bibit"
-                android:textColor="@color/dark"
-                app:chipStrokeColor="@android:color/transparent"
-                app:chipCornerRadius="50dp" />
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,26 +6,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.ykstar.bangkit.taniland.R
+import com.ykstar.bangkit.taniland.models.LahanModel
 
-data class Lahan(
-    val imageResId: Int,
-    val name: String,
-    val alamat: String,
-    val area: String,
-    val seed: String
-)
-
-
-class LahanAdapter(private val Lahans: List<Lahan>) :
+class LahanAdapter(private val lahanList: List<LahanModel>) :
     RecyclerView.Adapter<LahanAdapter.LahanViewHolder>() {
 
-    class LahanViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val lahanImageView: ImageView = view.findViewById(R.id.item_lahan_gambar)
-        val lahanNameTextView: TextView = view.findViewById(R.id.item_lahan_nama)
-        val lahanAlamatTextView: TextView = view.findViewById(R.id.item_lahan_alamat)
-        val lahanAreaTextView: TextView = view.findViewById(R.id.item_lahan_luas)
-        val lahanSeedTextView: TextView = view.findViewById(R.id.item_lahan_bibit)
+    class LahanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.item_lahan_gambar)
+        val nameTextView: TextView = itemView.findViewById(R.id.item_lahan_nama)
+        val addressTextView: TextView = itemView.findViewById(R.id.item_lahan_alamat)
+        val areaTextView: TextView = itemView.findViewById(R.id.item_lahan_luas)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LahanViewHolder {
@@ -34,15 +26,18 @@ class LahanAdapter(private val Lahans: List<Lahan>) :
     }
 
     override fun onBindViewHolder(holder: LahanViewHolder, position: Int) {
-        val lahan = Lahans[position]
-        holder.lahanImageView.setImageResource(lahan.imageResId)
-        holder.lahanNameTextView.text = lahan.name
-        holder.lahanAlamatTextView.text = lahan.alamat
-        holder.lahanAreaTextView.text =
-            holder.itemView.context.getString(R.string.item_lahan_luas, lahan.area)
-        holder.lahanSeedTextView.text =
-            holder.itemView.context.getString(R.string.item_lahan_bibit, lahan.seed)
+        val lahan = lahanList[position]
+
+        Glide.with(holder.itemView.context)
+            .load(lahan.photo)
+            .into(holder.imageView)
+
+        holder.nameTextView.text = lahan.nama
+        holder.addressTextView.text = lahan.alamat
+        holder.areaTextView.text =
+            holder.itemView.context.getString(R.string.item_lahan_luas, lahan.luas.toString())
     }
 
-    override fun getItemCount() = Lahans.size
+    override fun getItemCount() = lahanList.size
 }
+

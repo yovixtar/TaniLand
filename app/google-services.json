@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "820942148551",
+    "project_id": "taniland-888c6",
+    "storage_bucket": "taniland-888c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820942148551:android:17d2c952394bebc99d3fe2",
+        "android_client_info": {
+          "package_name": "com.ykstar.bangkit.taniland"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820942148551-amvmm3o1sc0nnech1vcssca5qm9p50lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ykstar.bangkit.taniland",
+            "certificate_hash": "2f6bff8bab58cb1ecf533b114a18278bc3c9972c"
+          }
+        },
+        {
+          "client_id": "820942148551-9k2d4fk3r8c9t92d5bhod4sn1jbd7gtf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdPZphTIlFOpRpRw4btPrryOqBSQ-LwZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820942148551-9k2d4fk3r8c9t92d5bhod4sn1jbd7gtf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

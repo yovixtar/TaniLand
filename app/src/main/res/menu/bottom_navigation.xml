@@ -6,12 +6,12 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/navigation_land"
+        android:id="@+id/navigation_lahan"
         android:icon="@drawable/baseline_layers_24"
         android:title="@string/lahan" />
 
     <item
-        android:id="@+id/navigation_article"
+        android:id="@+id/navigation_artikel"
         android:icon="@drawable/baseline_article_24"
         android:title="@string/artikel" />
 
