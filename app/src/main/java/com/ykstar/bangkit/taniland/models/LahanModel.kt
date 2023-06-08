@@ -25,3 +25,20 @@ data class LahanModel(
     val lat: Double?,
     val lon: Double?
 )
+
+data class DetailLahanResponse(
+    val error: Boolean,
+    val message: String,
+    val data: LahanDetail
+)
+
+data class LahanDetail(
+    val id: String,
+    val nama: String,
+    val photo: String,
+    val luas: Double,
+    val alamat: String,
+    val lat: Double?,
+    val lon: Double?,
+    val tanam: TanamModel?,
+)

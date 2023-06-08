@@ -23,7 +23,6 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.ykstar.bangkit.taniland.R
-import com.ykstar.bangkit.taniland.adapters.HomeAdapter
 import com.ykstar.bangkit.taniland.adapters.LahanAdapter
 import com.ykstar.bangkit.taniland.databinding.FragmentHomeBinding
 import com.ykstar.bangkit.taniland.pages.startup.AuthActivity

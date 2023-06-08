@@ -29,7 +29,7 @@
     <string name="tambah_lahan">Tambah Lahan</string>
     <string name="detail_lahan">Detail Lahan</string>
     <string name="riwayat_tanam">Riwayat Tanam</string>
-    <string name="pilih_produk">Pilih Produk</string>
+    <string name="pilih_bibit">Pilih Bibit</string>
     <string name="rekomendasi_tanam">Rekomendasi Tanam</string>
     <string name="btn_camera">btn_camera</string>
     <string name="kamera">Kamera</string>
@@ -41,7 +41,7 @@
     <string name="nama_bibit">Nama Bibit</string>
     <string name="harga_bibit">Harga Bibit</string>
     <string name="kategori_bibit">Kategori Bibit</string>
-    <string name="item_produk_harga">Rp %s</string>
+    <string name="item_bibit_harga">Rp %s</string>
     <string name="item_produk_gambar">item_produk_gambar</string>
     <string name="pilih">Pilih</string>
     <string name="beli">Beli</string>
@@ -66,4 +66,5 @@
     <string name="kesalahan_memuat_data">Kesalahan memuat data</string>
     <string name="floating_btn_tambah">Floating Btn Tambah</string>
     <string name="logout">Logout</string>
+    <string name="item_bibit_gambar">item_bibit_gambar</string>
 </resources>

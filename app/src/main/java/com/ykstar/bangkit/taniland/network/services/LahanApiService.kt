@@ -1,5 +1,6 @@
 package com.ykstar.bangkit.taniland.network.services
 
+import com.ykstar.bangkit.taniland.models.DetailLahanResponse
 import com.ykstar.bangkit.taniland.models.LahanRequest
 import com.ykstar.bangkit.taniland.models.LahanResponse
 import retrofit2.Response
@@ -7,6 +8,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface LahanApiService {
 
@@ -18,4 +20,10 @@ interface LahanApiService {
         @Header("Authorization") token: String,
         @Body lahan: LahanRequest
     ): Response<LahanResponse>
+
+    @GET("lahan/{id}")
+    suspend fun getLahanDetail(
+        @Path("id") id: String,
+        @Header("Authorization") token: String
+    ): Response<DetailLahanResponse?>
 }

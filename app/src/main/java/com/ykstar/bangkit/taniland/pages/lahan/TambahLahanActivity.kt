@@ -114,6 +114,7 @@ class TambahLahanActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.O
                         Intent(this, MainActivity::class.java).also {
                             it.putExtra("menu", "menuLahan")
                             startActivity(it)
+                            finish()
                         }
                     }
 

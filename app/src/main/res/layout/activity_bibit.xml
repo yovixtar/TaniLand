@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/neutral"
-    tools:context=".pages.produk.PilihProdukActivity">
+    tools:context=".pages.bibit.BibitActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/pilih_produk"
+            android:text="@string/pilih_bibit"
             style="@style/TitleLargeBold"/>
 
     </androidx.appcompat.widget.Toolbar>
@@ -64,16 +64,16 @@
                 tools:ignore="NotSibling" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/produkRecyclerView"
+                android:id="@+id/bibit_recycler_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar"
                 tools:ignore="NotSibling"
                 tools:itemCount="5"
-                tools:listitem="@layout/produk_item" />
+                tools:listitem="@layout/bibit_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
