@@ -41,7 +41,7 @@ class LahanAdapter(private val lahanList: List<LahanModel>) :
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailLahanActivity::class.java)
-            intent.putExtra("id", lahan.id)
+            intent.putExtra("lahan_id", lahan.id)
             holder.itemView.context.startActivity(intent)
         }
     }

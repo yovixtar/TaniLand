@@ -32,7 +32,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:contentDescription="@string/item_lahan_gambar"
-                app:srcCompat="@drawable/bibit" />
+                 />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -43,7 +43,6 @@
             android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@string/lahan"
             app:layout_constraintStart_toEndOf="@+id/card_item_gambar"
             app:layout_constraintTop_toTopOf="@+id/card_item_gambar" />
 
@@ -55,7 +54,6 @@
             android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@string/lahan"
             app:layout_constraintStart_toEndOf="@+id/card_item_gambar"
             app:layout_constraintTop_toBottomOf="@+id/item_lahan_nama" />
 
@@ -75,8 +73,21 @@
                 android:backgroundTint="@color/primary_teal"
                 android:clickable="false"
                 android:focusable="false"
-                android:text="@string/item_lahan_luas"
                 android:textColor="@color/white"
+                app:chipStrokeColor="@android:color/transparent"
+                app:chipCornerRadius="50dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/item_lahan_umur"
+                android:visibility="gone"
+                style="@style/BodyTiny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/ternary_yellow"
+                android:clickable="false"
+                android:focusable="false"
+                android:textColor="@color/dark"
                 app:chipStrokeColor="@android:color/transparent"
                 app:chipCornerRadius="50dp" />
 

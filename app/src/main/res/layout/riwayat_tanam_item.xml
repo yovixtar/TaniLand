@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp"
     android:backgroundTint="@color/white"
-    app:cardElevation="5dp"
-    app:strokeColor="@android:color/transparent">
+    app:strokeColor="@android:color/transparent"
+    app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:paddingBottom="10dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_item_bibit_gambar"
+            android:id="@+id/card_item_tanam_gambar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -27,65 +27,60 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/item_bibit_gambar"
+                android:id="@+id/item_riwayat_tanam_gambar"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:contentDescription="@string/item_bibit_gambar" />
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/item_bibit_nama"
+            android:id="@+id/item_riwayat_tanam_nama"
             style="@style/BodyLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            app:layout_constraintStart_toEndOf="@+id/card_item_bibit_gambar"
-            app:layout_constraintTop_toTopOf="@+id/card_item_bibit_gambar" />
+            app:layout_constraintStart_toEndOf="@+id/card_item_tanam_gambar"
+            app:layout_constraintTop_toTopOf="@+id/card_item_tanam_gambar" />
 
         <TextView
-            android:id="@+id/item_bibit_harga"
+            android:id="@+id/item_riwayat_tanam_tanggal_panen"
             style="@style/BodySmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:maxLines="1"
-            app:layout_constraintStart_toEndOf="@+id/card_item_bibit_gambar"
-            app:layout_constraintTop_toBottomOf="@+id/item_bibit_nama" />
+            app:layout_constraintStart_toEndOf="@+id/card_item_tanam_gambar"
+            app:layout_constraintTop_toBottomOf="@+id/item_riwayat_tanam_nama" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/item_bibit_jenis"
-            style="@style/BodyTiny"
+        <TextView
+            android:id="@+id/item_riwayat_tanam_jumlah_panen"
+            style="@style/BodySmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/ternary_yellow"
-            android:clickable="false"
-            android:focusable="false"
             android:textColor="@color/dark"
-            app:chipCornerRadius="50dp"
-            app:chipStrokeColor="@android:color/transparent"
-            app:layout_constraintStart_toStartOf="@+id/item_bibit_nama"
-            app:layout_constraintTop_toBottomOf="@+id/item_bibit_harga" />
+            app:layout_constraintStart_toStartOf="@+id/item_riwayat_tanam_tanggal_panen"
+            app:layout_constraintTop_toBottomOf="@+id/item_riwayat_tanam_tanggal_panen" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/item_bibit_pilih"
+            android:id="@+id/item_riwayat_tanam_lihat_laporan"
             style="@style/BodyLargeBold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_item_bibit_gambar"
+            android:layout_below="@+id/card_item_tanam_gambar"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/green_variant"
-            android:stateListAnimator="@animator/btn_elevation_anim"
-            android:text="@string/pilih_bibit"
+            android:text="@string/lihat_laporan_tanam"
             android:textColor="@color/white"
             app:cornerRadius="10dp"
             app:elevation="5dp"
-            app:layout_constraintStart_toStartOf="@+id/card_item_bibit_gambar"
-            app:layout_constraintTop_toBottomOf="@+id/card_item_bibit_gambar"
-            app:rippleColor="@null" />
+            android:stateListAnimator="@animator/btn_elevation_anim"
+            app:rippleColor="@null"
+            app:layout_constraintStart_toStartOf="@+id/card_item_tanam_gambar"
+            app:layout_constraintTop_toBottomOf="@+id/card_item_tanam_gambar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

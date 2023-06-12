@@ -5,10 +5,6 @@ import android.content.SharedPreferences
 
 class UserPreference(context: Context) {
 
-    private val PREF_NAME = "user_pref"
-    private val USER_ID = "user_id"
-    private val TOKEN = "user_token"
-
     private val sharedPref: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     fun saveToken(token: String) {
@@ -41,5 +37,11 @@ class UserPreference(context: Context) {
         val editor = sharedPref.edit()
         editor.remove(USER_ID)
         editor.apply()
+    }
+
+    companion object {
+        private const val PREF_NAME = "user_pref"
+        private const val USER_ID = "user_id"
+        private const val TOKEN = "user_token"
     }
 }

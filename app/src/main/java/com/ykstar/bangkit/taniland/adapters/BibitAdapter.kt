@@ -14,7 +14,8 @@ import com.ykstar.bangkit.taniland.models.BibitModel
 import java.text.NumberFormat
 import java.util.Locale
 
-class BibitAdapter(private val bibitList: List<BibitModel>) :
+class BibitAdapter(private val bibitList: List<BibitModel>,
+                   private val onPilihBibitClickListener: (BibitModel) -> Unit) :
     RecyclerView.Adapter<BibitAdapter.BibitViewHolder>() {
 
     class BibitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,8 +45,7 @@ class BibitAdapter(private val bibitList: List<BibitModel>) :
         holder.typeChip.text = bibit.jenis
 
         holder.selectButton.setOnClickListener {
-            // kode untuk memproses tindakan saat tombol pilih ditekan
-            // misalnya membuka activity baru, dll.
+            onPilihBibitClickListener(bibit)
         }
     }
 

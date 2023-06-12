@@ -1,51 +1,63 @@
 package com.ykstar.bangkit.taniland.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.ykstar.bangkit.taniland.models.LahanResponse
-import com.ykstar.bangkit.taniland.repositories.LahanRepository
-import com.ykstar.bangkit.taniland.utils.Resource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ykstar.bangkit.taniland.models.DetailLahanResponse
 import com.ykstar.bangkit.taniland.models.LahanRequest
+import com.ykstar.bangkit.taniland.repositories.LahanRepository
+import com.ykstar.bangkit.taniland.utils.Resource
 import kotlinx.coroutines.launch
 
 class LahanViewModel : ViewModel() {
     private val lahanRepository = LahanRepository()
 
-    private val _lahanResponseState = MutableLiveData<Resource<LahanResponse?>>()
-    val lahanResponse: LiveData<Resource<LahanResponse?>>
-        get() = _lahanResponseState
+    sealed class LahanState {
+        data class Success<T>(val data: T) : LahanState()
+        data class Error(val message: String) : LahanState()
+    }
 
-    private val _lahanTambah = MutableLiveData<Resource<LahanResponse?>>()
-    val lahanTambah: LiveData<Resource<LahanResponse?>> get() = _lahanTambah
-
-    private val _lahanDetail = MutableLiveData<Resource<DetailLahanResponse?>>()
-    val lahanDetail: LiveData<Resource<DetailLahanResponse?>>
-        get() = _lahanDetail
+    private val _lahanState = MutableLiveData<LahanState>()
+    val lahanState: LiveData<LahanState> get() = _lahanState
 
     fun tambahLahan(token: String?, lahan: LahanRequest) = viewModelScope.launch {
-        _lahanTambah.value = lahanRepository.tambahLahan(token, lahan)
+        val resource = lahanRepository.tambahLahan(token, lahan)
+        if (resource is Resource.Success) {
+            _lahanState.value = LahanState.Success(resource)
+        } else if (resource is Resource.Error) {
+            _lahanState.value = LahanState.Error(resource.exception?.message.toString())
+        }
     }
 
     fun getLahanData(token: String) {
         viewModelScope.launch {
             val resource = lahanRepository.getLahan(token)
-            _lahanResponseState.value = resource
+            if (resource is Resource.Success) {
+                _lahanState.value = LahanState.Success(resource)
+            } else if (resource is Resource.Error) {
+                _lahanState.value = LahanState.Error(resource.exception?.message.toString())
+            }
         }
     }
 
     fun getLahanDetail(id: String, token: String) = viewModelScope.launch {
         viewModelScope.launch {
             val resource = lahanRepository.getLahanDetail(id, token)
-
             if (resource is Resource.Success) {
-                _lahanDetail.value = resource
+                _lahanState.value = LahanState.Success(resource)
+            } else if (resource is Resource.Error) {
+                _lahanState.value = LahanState.Error(resource.exception?.message.toString())
             }
         }
+    }
 
+    fun deleteLahan(token: String?, lahan_id: String) = viewModelScope.launch {
+        val resource = lahanRepository.deleteLahan(token, lahan_id)
+        if (resource is Resource.Success) {
+            _lahanState.value = LahanState.Success(resource)
+        } else if (resource is Resource.Error) {
+            _lahanState.value = LahanState.Error(resource.exception?.message.toString())
+        }
     }
 
 }

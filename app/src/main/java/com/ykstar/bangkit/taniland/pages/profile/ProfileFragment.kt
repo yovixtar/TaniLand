@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -24,6 +23,7 @@ import com.ykstar.bangkit.taniland.pages.startup.AuthActivity
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.utils.InternetActive
 import com.ykstar.bangkit.taniland.utils.Resource
+import com.ykstar.bangkit.taniland.utils.showPrimaryToast
 import com.ykstar.bangkit.taniland.viewmodels.HomeViewModel
 
 class ProfileFragment : Fragment() {
@@ -74,11 +74,7 @@ class ProfileFragment : Fragment() {
                     }
 
                     is Resource.Error -> {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.silahkan_login_ulang),
-                            Toast.LENGTH_LONG
-                        ).show()
+                        context?.showPrimaryToast(getString(R.string.silahkan_login_ulang), false)
                         userPreferences.removeUserID()
                         userPreferences.removeToken()
                         progressDialog.dismiss()

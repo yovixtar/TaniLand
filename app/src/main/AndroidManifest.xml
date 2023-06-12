@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -19,15 +20,21 @@
         android:theme="@style/Theme.TaniLand"
         tools:targetApi="31">
         <activity
+            android:name=".pages.riwayattanam.RiwayatTanamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pages.premium.PlanPremiumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pages.camera.ScanQRActivity"
+            android:exported="false" />
+        <activity
             android:name=".pages.bibit.BibitActivity"
             android:exported="false" />
         <activity
             android:name=".pages.lahan.TambahLahanActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".pages.produk.PilihProdukActivity"
-            android:exported="false" />
         <activity
             android:name=".pages.lahan.DetailLahanActivity"
             android:exported="false" />

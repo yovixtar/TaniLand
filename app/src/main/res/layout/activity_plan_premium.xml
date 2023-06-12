@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/banner_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/banner_image_plan_premium"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_plan_premium" />
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_button_delete"
+        android:contentDescription="@string/close_button_plan_premium"
+        android:padding="8dp"
+        android:src="@drawable/baseline_close_24" />
+
+    <TextView
+        android:id="@+id/upgrade_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/banner_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="@string/upgrade"
+        android:textColor="@color/dark"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/badge_pro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/upgrade_title"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/upgrade_title"
+        android:background="@drawable/background_primary_toast"
+        android:padding="4dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/pro"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/upgrade_desc"
+        style="@style/BodyMedium"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/upgrade_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/desc_upgrade"
+        android:textAlignment="center"
+        android:textColor="@color/grey_main_border" />
+
+    <LinearLayout
+        android:id="@+id/feature_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/upgrade_desc"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:paddingStart="20dp"
+        android:orientation="vertical"
+        tools:ignore="RtlSymmetry">
+
+        <TextView
+            style="@style/BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:text="@string/feature_interactive_finance"
+            app:drawableStartCompat="@drawable/baseline_check_24" />
+
+        <TextView
+            style="@style/BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:text="@string/feature_finance_analysis"
+            app:drawableStartCompat="@drawable/baseline_check_24" />
+
+        <TextView
+            style="@style/BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:text="@string/feature_plant_care_analysis"
+            app:drawableStartCompat="@drawable/baseline_check_24" />
+
+        <TextView
+            style="@style/BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:text="@string/feature_purchase_order"
+            app:drawableStartCompat="@drawable/baseline_check_24" />
+
+        <TextView
+            style="@style/BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:text="@string/feature_productivity_report"
+            app:drawableStartCompat="@drawable/baseline_check_24" />
+
+        <TextView
+            style="@style/BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:text="@string/feature_performance_speed"
+            app:drawableStartCompat="@drawable/baseline_check_24" />
+    </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/contact_sales_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/feature_list"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/rounded_button_back"
+        android:padding="16dp"
+        android:text="@string/hubungi_kontak_sales_kami"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

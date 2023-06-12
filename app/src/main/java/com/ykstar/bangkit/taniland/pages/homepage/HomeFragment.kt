@@ -12,7 +12,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,6 +28,7 @@ import com.ykstar.bangkit.taniland.pages.startup.AuthActivity
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.utils.InternetActive
 import com.ykstar.bangkit.taniland.utils.Resource
+import com.ykstar.bangkit.taniland.utils.showPrimaryToast
 import com.ykstar.bangkit.taniland.viewmodels.HomeViewModel
 import com.ykstar.bangkit.taniland.viewmodels.WeatherViewModel
 import java.text.SimpleDateFormat
@@ -79,16 +79,19 @@ class HomeFragment : Fragment() {
 
                 binding.tanggalWeather.text = currentDate
                 binding.suhuWeather.text =
-                    getString(R.string.suhu_weather, tempInCelsius.toString())
+                    getString(R.string.suhu_celcius, tempInCelsius.toString())
                 val weatherDescriptionInEnglish = weatherResponse.weatherList[0].description
-                val weatherDescriptionInIndonesian = translateWeatherDescription(weatherDescriptionInEnglish)
+                val weatherDescriptionInIndonesian =
+                    translateWeatherDescription(weatherDescriptionInEnglish)
 
-                val weatherDescriptionCapitalized = weatherDescriptionInIndonesian.split(" ").joinToString(" ") { it ->
-                    it.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(
-                        Locale.getDefault()
-                    ) else it.toString()
-                } }
+                val weatherDescriptionCapitalized =
+                    weatherDescriptionInIndonesian.split(" ").joinToString(" ") { it ->
+                        it.replaceFirstChar {
+                            if (it.isLowerCase()) it.titlecase(
+                                Locale.getDefault()
+                            ) else it.toString()
+                        }
+                    }
                 binding.weatherStatusChip.text = weatherDescriptionCapitalized
             }
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -113,7 +116,7 @@ class HomeFragment : Fragment() {
 
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
-                    Log.d("Lokasi",location.toString())
+                    Log.d("Lokasi", location.toString())
                     location?.let {
                         weatherViewModel.fetchWeather(it.latitude, it.longitude)
                     }
@@ -141,11 +144,7 @@ class HomeFragment : Fragment() {
                     }
 
                     is Resource.Error -> {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.silahkan_login_ulang),
-                            Toast.LENGTH_LONG
-                        ).show()
+                        context?.showPrimaryToast(getString(R.string.silahkan_login_ulang), false)
                         userPreferences.removeUserID()
                         userPreferences.removeToken()
                         val intent = Intent(context, AuthActivity::class.java)
@@ -162,7 +161,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun translateWeatherDescription(desc: String): String {
-        return when(desc.lowercase(Locale.getDefault())) {
+        return when (desc.lowercase(Locale.getDefault())) {
             "clear sky" -> "Langit Cerah"
             "few clouds" -> "Sedikit Berawan"
             "scattered clouds" -> "Berawan Tersebar"
@@ -201,7 +200,8 @@ class HomeFragment : Fragment() {
     }
 }
 
-class GroupLiveData<T1, T2>(source1: LiveData<T1>, source2: LiveData<T2>) : LiveData<Pair<T1?, T2?>>() {
+class GroupLiveData<T1, T2>(source1: LiveData<T1>, source2: LiveData<T2>) :
+    LiveData<Pair<T1?, T2?>>() {
     private var data1: T1? = null
     private var data2: T2? = null
 

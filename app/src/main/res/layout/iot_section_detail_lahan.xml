@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="30dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_hubungkan_iot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green_variant"
+        android:text="@string/hubungkan_iot"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"
+        app:elevation="5dp"
+        app:strokeColor="@android:color/transparent"
+        android:visibility="gone"
+        app:rippleColor="@null" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/info_card"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_hubungkan_iot"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/white"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        app:strokeColor="@android:color/transparent"
+        app:rippleColor="@null">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:id="@+id/suhu_label"
+                        style="@style/BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/suhu" />
+
+                    <TextView
+                        android:id="@+id/suhu_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/suhu_label"
+                        android:textSize="30sp"
+                        android:textColor="@color/dark" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:id="@+id/kelembapan_label"
+                        style="@style/BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kelembapan" />
+
+                    <TextView
+                        android:id="@+id/kelembapan_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/kelembapan_label"
+                        android:textSize="30sp"
+                        android:textColor="@color/dark" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/button_reload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:background="@drawable/rounded_button_back"
+                        android:src="@drawable/baseline_360_24"
+                        android:contentDescription="@string/reload_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:padding="8dp"
+                        android:background="@drawable/rounded_button_delete"
+                        android:src="@drawable/baseline_delete_24"
+                        android:contentDescription="@string/button_delete" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

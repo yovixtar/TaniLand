@@ -16,9 +16,3 @@ data class AuthResponse(
     val message: String,
     val data: UserModel
 )
-
-data class UserHomeResponse(
-    val error: Boolean,
-    val message: String,
-    val data: UserModel
-)

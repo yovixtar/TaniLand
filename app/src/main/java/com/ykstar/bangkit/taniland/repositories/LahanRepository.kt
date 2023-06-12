@@ -1,8 +1,10 @@
 package com.ykstar.bangkit.taniland.repositories
 
+import android.util.Log
 import com.ykstar.bangkit.taniland.models.DetailLahanResponse
 import com.ykstar.bangkit.taniland.models.LahanRequest
 import com.ykstar.bangkit.taniland.models.LahanResponse
+import com.ykstar.bangkit.taniland.models.WithoutDataResponseModel
 import com.ykstar.bangkit.taniland.network.ApiConfig
 import com.ykstar.bangkit.taniland.network.services.LahanApiService
 import com.ykstar.bangkit.taniland.utils.Resource
@@ -42,10 +44,25 @@ class LahanRepository {
             if (response.isSuccessful) {
                 Resource.Success(response.body())
             } else {
+                Log.d("Repos Detail", response.message().toString())
                 Resource.Error(Exception(response.message()))
             }
         } catch (e: Exception) {
-            Resource.Error(Exception(e.message))
+            Log.d("Repos Detail", e.toString())
+            Resource.Error(e)
+        }
+    }
+
+    suspend fun deleteLahan(token: String?, lahan_id: String): Resource<WithoutDataResponseModel?> {
+        return try {
+            val response = apiService.deleteLahan(lahan_id, BEARER + token)
+            if (response.isSuccessful) {
+                Resource.Success(response.body())
+            } else {
+                Resource.Error(Exception(response.message()))
+            }
+        } catch (e: Exception) {
+            Resource.Error(e)
         }
     }
 

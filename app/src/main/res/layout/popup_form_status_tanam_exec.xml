@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_form_status_tanam_exec"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/jarak_label"
+        style="@style/BodyMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/jarak_input"
+        android:text="@string/jarak_antar_tanaman" />
+
+    <EditText
+        android:id="@+id/jarak_input"
+        style="@style/BodyLargeBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/default_jarak_tanaman"
+        android:importantForAutofill="no"
+        android:inputType="number" />
+
+    <TextView
+        style="@style/BodyMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:labelFor="@+id/tanggal_tanam_input"
+        android:text="@string/tanggal_tanam" />
+
+    <EditText
+        android:id="@+id/tanggal_tanam_input"
+        style="@style/BodyLargeBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:focusable="false"
+        android:importantForAutofill="no"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/btn_simpan"
+        style="@style/BodyMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bottom_navigation_background"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/simpan"
+        android:textColor="@color/white" />
+
+</LinearLayout>

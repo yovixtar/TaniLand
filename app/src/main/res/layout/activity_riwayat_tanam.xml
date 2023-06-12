@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/neutral"
-    tools:context=".pages.bibit.BibitActivity">
+    tools:context=".pages.riwayattanam.RiwayatTanamActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/pilih_bibit"
+            android:text="@string/riwayat_tanam"
             style="@style/TitleLargeBold"/>
 
     </androidx.appcompat.widget.Toolbar>
@@ -47,13 +47,13 @@
         android:layout_below="@id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bibit_recycler_view"
+        android:id="@+id/riwayat_tanam_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/noData"
         android:layout_marginTop="20dp"
         android:paddingHorizontal="20dp"
         tools:itemCount="5"
-        tools:listitem="@layout/bibit_item" />
+        tools:listitem="@layout/riwayat_tanam_item" />
 
 </RelativeLayout>

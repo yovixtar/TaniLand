@@ -10,7 +10,6 @@ import android.location.Location
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
@@ -29,6 +28,7 @@ import com.ykstar.bangkit.taniland.models.LahanRequest
 import com.ykstar.bangkit.taniland.pages.MainActivity
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.utils.Resource
+import com.ykstar.bangkit.taniland.utils.showPrimaryToast
 import com.ykstar.bangkit.taniland.viewmodels.LahanViewModel
 
 class TambahLahanActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener {
@@ -107,23 +107,32 @@ class TambahLahanActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.O
                 )
             )
 
-            viewModel.lahanTambah.observe(this) { resource ->
-                when (resource) {
-                    is Resource.Success -> {
-                        progressDialog.dismiss()
-                        Intent(this, MainActivity::class.java).also {
-                            it.putExtra("menu", "menuLahan")
-                            startActivity(it)
-                            finish()
+            viewModel.lahanState.observe(this) { state ->
+                when (state) {
+                    is LahanViewModel.LahanState.Success<*> -> {
+                        when (state.data) {
+                            is Resource.Success<*> -> {
+                                progressDialog.dismiss()
+                                showPrimaryToast(getString(R.string.berhasil_menambahkan_lahan))
+                                Intent(this, MainActivity::class.java).also {
+                                    it.putExtra("menu", "menuLahan")
+                                    startActivity(it)
+                                    finish()
+                                }
+                            }
+                            is Resource.Error<*> -> {
+                                showPrimaryToast(getString(R.string.gagal_menambahkan_lahan), false)
+                                progressDialog.dismiss()
+                            }
                         }
                     }
 
-                    is Resource.Error -> {
-                        Toast.makeText(this, resource.exception?.message, Toast.LENGTH_LONG).show()
+                    is LahanViewModel.LahanState.Error -> {
                         progressDialog.dismiss()
                     }
                 }
             }
+
         }
     }
 
@@ -205,12 +214,9 @@ class TambahLahanActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.O
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show()
                 val mapFragment = supportFragmentManager
                     .findFragmentById(R.id.maps) as SupportMapFragment
                 mapFragment.getMapAsync(this)
-            } else {
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
             }
         }
     }

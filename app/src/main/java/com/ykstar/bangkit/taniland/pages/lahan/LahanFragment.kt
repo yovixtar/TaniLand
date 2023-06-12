@@ -1,24 +1,19 @@
 package com.ykstar.bangkit.taniland.pages.lahan
 
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ykstar.bangkit.taniland.R
 import com.ykstar.bangkit.taniland.adapters.LahanAdapter
-import com.ykstar.bangkit.taniland.databinding.ActivityMainBinding
 import com.ykstar.bangkit.taniland.databinding.FragmentLahanBinding
-import com.ykstar.bangkit.taniland.pages.MainActivity
-import com.ykstar.bangkit.taniland.pages.startup.AuthActivity
+import com.ykstar.bangkit.taniland.models.LahanResponse
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.utils.InternetActive
 import com.ykstar.bangkit.taniland.utils.Resource
@@ -54,22 +49,33 @@ class LahanFragment : Fragment() {
         } else {
             progressDialog.show()
             userPreferences.getToken()?.let { viewModel.getLahanData(it) }
-            viewModel.lahanResponse.observe(viewLifecycleOwner) { resource ->
-                when (resource) {
-                    is Resource.Success -> {
-                        resource.data?.let { lahanResponse ->
-                            binding.noData.visibility =
-                                if (lahanResponse.data.isEmpty()) View.VISIBLE else View.GONE
-                            binding.lahanRecyclerView.apply {
-                                layoutManager = LinearLayoutManager(requireContext())
-                                adapter = LahanAdapter(lahanResponse.data)
+            viewModel.lahanState.observe(viewLifecycleOwner) { state ->
+                when (state) {
+                    is LahanViewModel.LahanState.Success<*> -> {
+                        when (val resource = state.data) {
+                            is Resource.Success<*> -> {
+                                when (val data = resource.data) {
+                                    is LahanResponse -> {
+                                        binding.noData.visibility =
+                                            if (data.data.isEmpty()) View.VISIBLE else View.GONE
+                                        binding.lahanRecyclerView.apply {
+                                            layoutManager = LinearLayoutManager(requireContext())
+                                            adapter = LahanAdapter(data.data)
+                                        }
+                                        progressDialog.dismiss()
+                                    }
+                                }
                             }
-                            progressDialog.dismiss()
+
+                            is Resource.Error<*> -> {
+
+                                progressDialog.dismiss()
+                            }
                         }
                     }
 
-                    is Resource.Error -> {
-                        Toast.makeText(requireContext(), getString(R.string.kesalahan_memuat_data), Toast.LENGTH_LONG).show()
+                    is LahanViewModel.LahanState.Error -> {
+
                         progressDialog.dismiss()
                     }
                 }

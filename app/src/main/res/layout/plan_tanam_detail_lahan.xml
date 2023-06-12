@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="5dp"
-    app:layout_constraintTop_toBottomOf="@id/lahanItem">
+    app:cardElevation="5dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -31,16 +30,16 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/item_produk_gambar"
+                    android:id="@+id/item_bibit_gambar"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:contentDescription="@string/item_produk_gambar"
+                    android:contentDescription="@string/item_bibit_gambar"
                     android:src="@drawable/bibit" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/item_produk_nama"
+                android:id="@+id/item_bibit_nama"
                 style="@style/TitleSmallBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +66,7 @@
                 android:stateListAnimator="@animator/btn_elevation_anim"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_produk_nama" />
+                app:layout_constraintTop_toBottomOf="@+id/item_bibit_nama" />
 
             <Button
                 android:id="@+id/button_beli"
@@ -75,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:backgroundTint="@color/primary_green"
-                android:text="@string/beli_produk"
+                android:text="@string/beli_bibit"
                 android:textColor="@color/white"
                 style="@style/BodyMedium"
                 app:cornerRadius="10dp"
@@ -84,18 +83,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_tanam_sekarang" />
 
+            <Button
+                android:id="@+id/button_purchase_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:backgroundTint="@color/primary_green"
+                android:text="@string/purchase_order"
+                android:textColor="@color/white"
+                style="@style/BodyMedium"
+                app:cornerRadius="10dp"
+                android:stateListAnimator="@animator/btn_elevation_anim"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_beli" />
+
             <ImageButton
                 android:id="@+id/button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="14dp"
-                android:backgroundTint="@color/accient"
+                android:padding="10dp"
+                android:background="@drawable/rounded_button_delete"
                 android:contentDescription="@string/button_delete"
                 android:src="@drawable/baseline_delete_24"
                 app:cornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ykstar.bangkit.taniland.models.AuthResponse
-import com.ykstar.bangkit.taniland.models.UserHomeResponse
 import com.ykstar.bangkit.taniland.models.UserModel
 import com.ykstar.bangkit.taniland.models.WeatherResponse
 import com.ykstar.bangkit.taniland.repositories.UserRepository

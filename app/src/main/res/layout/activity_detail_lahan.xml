@@ -33,6 +33,17 @@
             android:text="@string/detail_lahan"
             style="@style/TitleLargeBold"/>
 
+        <ImageButton
+            android:id="@+id/delete_lahan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_button_delete"
+            android:contentDescription="@string/backbutton"
+            android:padding="10dp"
+            android:src="@drawable/baseline_delete_24" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
@@ -73,12 +84,21 @@
                 tools:ignore="NotSibling" />
 
             <include
+                android:id="@+id/iot_section_detail_lahan"
+                layout="@layout/iot_section_detail_lahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lahanItem"
+                android:visibility="visible"/>
+
+            <include
                 android:id="@+id/pre_tanam_detail_lahan"
                 layout="@layout/pre_tanam_detail_lahan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lahanItem"
+                app:layout_constraintTop_toBottomOf="@id/iot_section_detail_lahan"
                 android:visibility="gone"/>
 
             <include
@@ -88,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lahanItem"
+                app:layout_constraintTop_toBottomOf="@id/iot_section_detail_lahan"
                 android:visibility="gone"/>
 
             <include
@@ -98,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lahanItem"
+                app:layout_constraintTop_toBottomOf="@id/iot_section_detail_lahan"
                 android:visibility="gone"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,15 +24,15 @@ import com.ykstar.bangkit.taniland.pages.MainActivity
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.utils.InternetActive
 import com.ykstar.bangkit.taniland.utils.Resource
+import com.ykstar.bangkit.taniland.utils.showPrimaryToast
 import com.ykstar.bangkit.taniland.viewmodels.UserViewModel
 
 class AuthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthBinding
     private lateinit var progressDialog: Dialog
+
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +61,7 @@ class AuthActivity : AppCompatActivity() {
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-        // Initialize Firebase Auth
+
         auth = Firebase.auth
 
         binding.btnGoogle.setOnClickListener {
@@ -93,14 +93,11 @@ class AuthActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
                 progressDialog.dismiss()
-                Log.w(TAG, "Google sign in failed", e)
+                showPrimaryToast(getString(R.string.kesalahan_authentikasi_coba_lagi), false)
             }
         }
     }
@@ -113,7 +110,7 @@ class AuthActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     val userViewModel = UserViewModel(this)
                     userViewModel.authenticate(user?.displayName, user?.email)
-                    userViewModel.authenticationState.observe(this, Observer { resource ->
+                    userViewModel.authenticationState.observe(this) { resource ->
                         when (resource) {
                             is Resource.Success -> {
                                 progressDialog.dismiss()
@@ -121,28 +118,19 @@ class AuthActivity : AppCompatActivity() {
                             }
 
                             is Resource.Error -> {
-                                Log.e(
-                                    "AuthActivity",
-                                    "Error during authentication",
-                                    resource.exception
-                                )
+                                showPrimaryToast(getString(R.string.kesalahan_authentikasi_coba_lagi), false)
                                 progressDialog.dismiss()
                                 auth.signOut()
                                 googleSignInClient.signOut()
                             }
                         }
-                    })
+                    }
                 } else {
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    showPrimaryToast(getString(R.string.kesalahan_authentikasi_coba_lagi), false)
                     auth.signOut()
                     googleSignInClient.signOut()
                 }
             }
     }
 
-    //                    auth.signOut()
-//                    googleSignInClient.signOut()
-    companion object {
-        private const val TAG = "Auth Activity"
-    }
 }

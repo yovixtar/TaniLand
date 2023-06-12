@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.ykstar.bangkit.taniland"
-        minSdk 21
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -19,6 +19,7 @@ android {
 
         buildConfigField 'String', 'BASE_API_URL', '"https://tani-land-qkb7fzajaq-uc.a.run.app/api/v1/"'
         buildConfigField 'String', 'WHEATER_API_URL', '"https://api.openweathermap.org/data/2.5/"'
+        buildConfigField 'String', 'WA_API_URL', '"https://api.whatsapp.com/send?phone=6281220404221&text=Halo,%20saya%20tertarik%20untuk%20meng-upgrade%20ke%20TaniLand%20Pro."'
     }
 
     buildTypes {
@@ -100,5 +101,11 @@ dependencies {
 
     // Maps
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    // Scan QR
+    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+
+    // json
+    implementation 'com.google.code.gson:gson:2.8.9'
 
 }
