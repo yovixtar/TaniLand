@@ -23,8 +23,8 @@ TaniLand is an advanced agricultural mobile application developed to empower far
 - Retrofit
 - Glide
 - Google Play Services (Firebase, Maps)
-- Room Database
 - ViewModel and LiveData
+- etc
 
 ## Architecture
 TaniLand follows the Model-View-ViewModel (MVVM) architecture. This design pattern allows the separation of the development of the graphical user interface from the business logic or back-end logic, promoting a more readable and maintainable code.
