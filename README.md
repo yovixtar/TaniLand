@@ -46,7 +46,7 @@ We welcome contributions to TaniLand. Please follow these guidelines for contrib
 3. Push your branch and submit a pull request.
 
 ## License
-This project is licensed under the terms of the MIT license. See [LICENSE](LICENSE) for more details.
+This project is licensed under the terms of the MIT license. See [LICENSE]([LICENSE](https://github.com/yovixtar/myapps-privacy-policy/blob/main/privacy-policy-warnet-topup.md)) for more details.
 
 ## Conclusion
 With TaniLand, we aim to revolutionize agriculture by providing farmers with technological tools to increase their efficiency and productivity. This is just the beginning, and we have an exciting roadmap of features planned for future development.
