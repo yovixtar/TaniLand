@@ -24,9 +24,6 @@ class PlanPremiumActivity : AppCompatActivity() {
         }
 
         binding.contactSalesButton.setOnClickListener {
-            val phone = ""
-            val message = "Halo, saya tertarik untuk meng-upgrade ke TaniLand Pro."
-
             val isWhatsappInstalled = isAppInstalled(this, WA_PKG)
             if (isWhatsappInstalled) {
                 val sendIntent = Intent(INTENT_MAIN)

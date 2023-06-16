@@ -20,6 +20,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ykstar.bangkit.taniland.R
 import com.ykstar.bangkit.taniland.databinding.ActivityAuthBinding
+import com.ykstar.bangkit.taniland.models.AuthRequest
 import com.ykstar.bangkit.taniland.pages.MainActivity
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.utils.InternetActive
@@ -109,7 +110,8 @@ class AuthActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     val userViewModel = UserViewModel(this)
-                    userViewModel.authenticate(user?.displayName, user?.email)
+                    val authdata = AuthRequest(user?.displayName, user?.email)
+                    userViewModel.authenticate(authdata)
                     userViewModel.authenticationState.observe(this) { resource ->
                         when (resource) {
                             is Resource.Success -> {

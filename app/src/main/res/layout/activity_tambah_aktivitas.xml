@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/neutral"
+    tools:context=".pages.aktivitas.TambahAktivitasActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="10dp"
+        android:background="@color/neutral"
+        app:contentInsetStart="0dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/rounded_button_back"
+            android:contentDescription="@string/backbutton"
+            android:padding="10dp"
+            android:src="@drawable/baseline_arrow_back_24" />
+
+        <TextView
+            android:id="@+id/main_title"
+            style="@style/TitleLargeBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/tambah_aktivitas" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:clipToPadding="false"
+        android:paddingBottom="?attr/actionBarSize">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:paddingHorizontal="20dp">
+
+            <!-- Kategori Aktivitas -->
+            <TextView
+                android:id="@+id/label_kategori"
+                style="@style/BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:labelFor="@+id/input_kategori"
+                android:text="@string/kategori_aktivitas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/input_kategori"
+                style="@style/BodyMediumBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/textcolor_body"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_kategori" />
+
+            <!-- Nama Aktivitas -->
+            <TextView
+                android:id="@+id/label_nama_aktivitas"
+                style="@style/BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:labelFor="@+id/input_nama_aktivitas"
+                android:text="@string/nama_aktivitas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_kategori" />
+
+            <EditText
+                android:id="@+id/input_nama_aktivitas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textColor="@color/textcolor_body"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_nama_aktivitas" />
+
+            <!-- Keterangan Aktivitas -->
+            <TextView
+                android:id="@+id/label_keterangan"
+                style="@style/BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:labelFor="@+id/input_keterangan"
+                android:text="@string/keterangan_aktivitas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_nama_aktivitas" />
+
+            <EditText
+                android:id="@+id/input_keterangan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:textColor="@color/textcolor_body"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_keterangan" />
+
+            <!-- Kebutuhan Pupuk -->
+            <LinearLayout
+                android:id="@+id/layout_pupuk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_keterangan">
+
+                <!-- Jenis Pupuk -->
+                <TextView
+                    android:id="@+id/label_jenis_pupuk"
+                    style="@style/BodyMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:labelFor="@+id/spinner_jenis_pupuk"
+                    android:text="@string/jenis_pupuk" />
+
+                <Spinner
+                    android:id="@+id/input_jenis_pupuk"
+                    style="@style/BodyMediumBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:spinnerMode="dropdown"
+                    android:textColor="@color/textcolor_body" />
+
+                <!-- Jumlah Penggunaan Pupuk -->
+                <TextView
+                    android:id="@+id/label_jumlah_pupuk"
+                    style="@style/BodyMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:labelFor="@+id/input_jumlah_pupuk"
+                    android:text="@string/jumlah_penggunaan_pupuk_kg" />
+
+                <EditText
+                    android:id="@+id/input_jumlah_pupuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/textcolor_body" />
+
+            </LinearLayout>
+
+            <!-- Button Simpan -->
+            <Button
+                android:id="@+id/button_simpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/btn_corner_green"
+                android:backgroundTint="@color/primary_green"
+                android:elevation="5dp"
+                android:text="@string/simpan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_pupuk" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -14,8 +14,10 @@ import com.ykstar.bangkit.taniland.models.BibitModel
 import java.text.NumberFormat
 import java.util.Locale
 
-class BibitAdapter(private val bibitList: List<BibitModel>,
-                   private val onPilihBibitClickListener: (BibitModel) -> Unit) :
+class BibitAdapter(
+    private val bibitList: List<BibitModel>,
+    private val onPilihBibitClickListener: (BibitModel) -> Unit
+) :
     RecyclerView.Adapter<BibitAdapter.BibitViewHolder>() {
 
     class BibitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,7 +43,8 @@ class BibitAdapter(private val bibitList: List<BibitModel>,
         holder.nameTextView.text = bibit.nama
         val numberFormat = NumberFormat.getNumberInstance(Locale.US)
         val hargaBibit = numberFormat.format(bibit.harga_beli)
-        holder.priceTextView.text = holder.itemView.context.getString(R.string.item_bibit_harga, hargaBibit)
+        holder.priceTextView.text =
+            holder.itemView.context.getString(R.string.item_bibit_harga, hargaBibit)
         holder.typeChip.text = bibit.jenis
 
         holder.selectButton.setOnClickListener {

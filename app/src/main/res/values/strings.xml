@@ -8,16 +8,12 @@
     <string name="tidak_ada_koneksi_internet">Tidak ada koneksi Internet</string>
     <string name="mohon_hubungkan_kembali_koneksi_internet_anda_dan_coba_kembali">Mohon hubungkan kembali koneksi internet anda dan coba kembali.</string>
     <string name="avatar_profile">Avatar Profile</string>
-    <string name="nama_user">Khazim Fikri</string>
     <string name="premium">Premium</string>
     <string name="weathericon">weatherIcon</string>
-    <string name="hari_tanggal">Hari, Tanggal</string>
     <string name="satuan_hari">%s Hari</string>
     <string name="suhu_celcius">%s°C</string>
-    <string name="ket_weather">Panas Terik</string>
     <string name="tidak_ada_data">Tidak Ada Data</string>
     <string name="item_lahan_luas">%s Hektar</string>
-    <string name="item_lahan_bibit">%s</string>
     <string name="item_lahan_gambar">item_lahan_gambar</string>
     <string name="home">Home</string>
     <string name="lahan">Lahan</string>
@@ -40,11 +36,7 @@
     <string name="iot">IoT</string>
     <string name="batal">Batal</string>
     <string name="nama_bibit">Nama Bibit</string>
-    <string name="harga_bibit">Harga Bibit</string>
-    <string name="kategori_bibit">Kategori Bibit</string>
     <string name="item_bibit_harga">Rp %s</string>
-    <string name="pilih">Pilih</string>
-    <string name="beli">Beli</string>
     <string name="button_delete">button_delete</string>
     <string name="beli_bibit">Beli Bibit</string>
     <string name="tanam_sekarang">Tanam Sekarang</string>
@@ -54,14 +46,11 @@
     <string name="simpan">Simpan</string>
     <string name="data_penanaman">Data Penanaman</string>
     <string name="bibit">Bibit</string>
-    <string name="luas">Luas</string>
-    <string name="alamat">Alamat</string>
     <string name="umur_tanam">Umur Tanaman</string>
     <string name="kelola_keuangan">Kelola Keuangan</string>
     <string name="panen">Panen</string>
     <string name="jadwal_perawatan">Jadwal Perawatan</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="silahkan_login_ulang">Silahkan login ulang</string>
     <string name="kesalahan_memuat_data">Kesalahan memuat data</string>
     <string name="floating_btn_tambah">Floating Btn Tambah</string>
@@ -71,6 +60,7 @@
     <string name="hubungkan_iot">Hubungkan IoT</string>
     <string name="reload_button">reload_button</string>
     <string name="kelembapan">Kelembapan</string>
+    <string name="kelembapan_persen">%s %%</string>
     <string name="suhu">Suhu</string>
     <string name="toast_icon">toast_icon</string>
     <string name="kesalahan_authentikasi_coba_lagi">Kesalahan Authentikasi, Coba lagi.</string>
@@ -86,7 +76,7 @@
     <string name="gagal_menghapus_plan_tanam">Gagal menghapus plan tanam</string>
     <string name="tidak">Tidak</string>
     <string name="berhasil_menghubungkan_iot_ke_lahan">Berhasil Menghubungkan IoT ke Lahan</string>
-    <string name="iot_tool_sudah_terdaftar_pada_lahan_anda">IoT Tool sudah terdaftar pada lahan Anda</string>
+    <string name="iot_tool_sudah_terdaftar_pada_lahan_lain">IoT Tool tidak ditemukan / sudah terdaftar pada lahan Lain</string>
     <string name="berhasil_menambahkan_lahan">Berhasil menambahkan Lahan</string>
     <string name="banner_image_plan_premium">banner_image_plan_premium</string>
     <string name="close_button_plan_premium">close_button_plan_premium</string>
@@ -111,5 +101,20 @@
     <string name="jumlah_panen_kg">Jumlah Panen (Kg)</string>
     <string name="harga_panen_per_kg">Harga Panen (per Kg)</string>
     <string name="lihat_laporan_tanam">Lihat Laporan Tanam</string>
-    <string name="coming_soon">Coming Soon</string>
+    <string name="data_iot_berhasil_terhapus">Data IoT berhasil terhapus</string>
+    <string name="cari_artikel">Cari Artikel</string>
+    <string name="tidak_ada_artikel_yang_tersedia">Tidak ada artikel yang tersedia</string>
+    <string name="laporan_seluruh_lahan">Laporan Seluruh Lahan</string>
+    <string name="panduan_penggunaan">Panduan Penggunaan</string>
+    <string name="standard">Standard</string>
+    <string name="rekomendasi_jadwal_1_7">Untuk periode 1 - 7 hari setelah penanaman, kami sarankan untuk fokus pada penanaman benih, pemupukan dasar, dan perlakuan benih, sebagai langkah awal yang krusial dalam siklus pertumbuhan sayuran Anda.</string>
+    <string name="hari_ke_1_7">Hari ke 1 – 7</string>
+    <string name="tambah_aktivitas">Tambah Aktivitas</string>
+    <string name="kategori_aktivitas">Kategori Aktivitas</string>
+    <string name="nama_aktivitas">Nama Aktivitas</string>
+    <string name="keterangan_aktivitas">Keterangan Aktivitas</string>
+    <string name="jenis_pupuk">Jenis Pupuk</string>
+    <string name="jumlah_penggunaan_pupuk_kg">Jumlah Penggunaan Pupuk (Kg)</string>
+    <string name="coming_soon">Coming soon</string>
+
 </resources>

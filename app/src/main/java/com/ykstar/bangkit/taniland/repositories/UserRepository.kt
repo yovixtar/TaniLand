@@ -1,5 +1,6 @@
 package com.ykstar.bangkit.taniland.repositories
 
+import com.ykstar.bangkit.taniland.models.AuthRequest
 import com.ykstar.bangkit.taniland.models.AuthResponse
 import com.ykstar.bangkit.taniland.models.UserModel
 import com.ykstar.bangkit.taniland.network.ApiConfig
@@ -9,9 +10,9 @@ import com.ykstar.bangkit.taniland.utils.Resource
 class UserRepository {
     private val apiService = ApiConfig.createService(UserApiService::class.java)
 
-    suspend fun authenticate(username: String?, email: String?): Resource<AuthResponse> {
+    suspend fun authenticate(authdata: AuthRequest): Resource<AuthResponse> {
         return try {
-            val response = apiService.authenticate(mapOf("username" to username, "email" to email))
+            val response = apiService.authenticate(authdata)
             Resource.Success(response)
         } catch (e: Exception) {
             Resource.Error(e)

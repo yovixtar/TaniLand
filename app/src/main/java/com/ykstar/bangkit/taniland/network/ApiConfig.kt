@@ -8,7 +8,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiConfig {
-    private const val BASE_URL = "https://cicd-qkb7fzajaq-uc.a.run.app/api/v1/"
+    private const val BASE_URL = BuildConfig.BASE_API_URL
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {

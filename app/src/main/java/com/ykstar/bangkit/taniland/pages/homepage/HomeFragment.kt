@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -116,7 +115,6 @@ class HomeFragment : Fragment() {
 
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
-                    Log.d("Lokasi", location.toString())
                     location?.let {
                         weatherViewModel.fetchWeather(it.latitude, it.longitude)
                     }
@@ -131,7 +129,7 @@ class HomeFragment : Fragment() {
                                 if (userModel.lahan.isEmpty()) View.VISIBLE else View.GONE
                             binding.namaUser.text = userModel.username
                             binding.statusUser.text =
-                                if (userModel.premium) "Premium" else "Standard"
+                                if (userModel.premium) getString(R.string.premium) else getString(R.string.standard)
                             Glide.with(this)
                                 .load(userModel.photo)
                                 .into(binding.profileImage)

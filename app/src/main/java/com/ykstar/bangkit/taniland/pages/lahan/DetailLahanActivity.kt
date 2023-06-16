@@ -30,6 +30,7 @@ import com.ykstar.bangkit.taniland.databinding.PreTanamDetailLahanBinding
 import com.ykstar.bangkit.taniland.models.DetailLahanResponse
 import com.ykstar.bangkit.taniland.models.LahanDetail
 import com.ykstar.bangkit.taniland.pages.MainActivity
+import com.ykstar.bangkit.taniland.pages.aktivitas.TambahAktivitasActivity
 import com.ykstar.bangkit.taniland.pages.bibit.BibitActivity
 import com.ykstar.bangkit.taniland.pages.camera.ScanQRActivity
 import com.ykstar.bangkit.taniland.pages.premium.PlanPremiumActivity
@@ -38,7 +39,10 @@ import com.ykstar.bangkit.taniland.preferences.IoTPreference
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.utils.InternetActive
 import com.ykstar.bangkit.taniland.utils.Resource
+import com.ykstar.bangkit.taniland.utils.formatDate
+import com.ykstar.bangkit.taniland.utils.formatDateToAPI
 import com.ykstar.bangkit.taniland.utils.showPrimaryToast
+import com.ykstar.bangkit.taniland.viewmodels.IoTViewModel
 import com.ykstar.bangkit.taniland.viewmodels.LahanViewModel
 import com.ykstar.bangkit.taniland.viewmodels.TanamViewModel
 import java.text.ParseException
@@ -63,6 +67,7 @@ class DetailLahanActivity : AppCompatActivity() {
 
     private val lahanViewModel: LahanViewModel by viewModels()
     private val tanamViewModel: TanamViewModel by viewModels()
+    private val iotViewModel: IoTViewModel by viewModels()
 
     private lateinit var userPreferences: UserPreference
     private lateinit var ioTPreference: IoTPreference
@@ -77,7 +82,7 @@ class DetailLahanActivity : AppCompatActivity() {
         userPreferences = UserPreference(this)
         ioTPreference = IoTPreference(this)
 
-        binding.backButton.setOnClickListener() {
+        binding.backButton.setOnClickListener {
             finish()
         }
 
@@ -102,39 +107,34 @@ class DetailLahanActivity : AppCompatActivity() {
         preTanamDetailLahanBinding = PreTanamDetailLahanBinding.bind(preTanamDetailLahanLayout)
         planTanamDetailLahanBinding = PlanTanamDetailLahanBinding.bind(planTanamDetailLahanLayout)
 
-        val lahanId = intent.getStringExtra("lahan_id").toString()
-
-        iotSectionDetailLahanBinding.buttonHubungkanIot.setOnClickListener {
-            val intent = Intent(this, ScanQRActivity::class.java)
-            intent.putExtra("lahan_id", lahanId)
-            resultLauncher.launch(intent)
-        }
-
+        val lahanId = intent.getStringExtra(LAHAN_ID).toString()
 
         val token = userPreferences.getToken().toString()
 
         if (!InternetActive.isOnline(this)) {
             InternetActive.showNoInternetDialog(this)
         } else {
-            progressDialog.show()
             lahanViewModel.getLahanDetail(lahanId, token)
 
             lahanViewModel.lahanState.observe(this) { state ->
                 when (state) {
+                    is LahanViewModel.LahanState.Loading -> {
+                        progressDialog.show()
+                    }
+
                     is LahanViewModel.LahanState.Success<*> -> {
                         when (val resource = state.data) {
                             is Resource.Success<*> -> {
-                                Log.d("berhasil detail", resource.data.toString())
                                 if (resource.data is DetailLahanResponse) {
+
                                     val detailLahanResponse = resource.data.data
                                     updateUI(token, detailLahanResponse, progressDialog)
-                                    if (ioTPreference.getIot(detailLahanResponse.id)
-                                            ?.isNotEmpty() == true
-                                    ) {
-                                        updateUI_IoTSection()
+
+                                    val iotID = ioTPreference.getIot(detailLahanResponse.id)
+                                    if (iotID?.isNotEmpty() == true) {
+                                        updateUI_IoTSection(iotID, token, lahanId)
                                     } else {
-                                        binding.iotSectionDetailLahan.buttonHubungkanIot.visibility =
-                                            View.VISIBLE
+                                        updateUI_HubungkanIoT(lahanId)
                                     }
                                     onClickPilihBibit(detailLahanResponse.id)
                                 }
@@ -160,7 +160,7 @@ class DetailLahanActivity : AppCompatActivity() {
     private fun onClickPilihBibit(lahan_id: String) {
         preTanamDetailLahanBinding.buttonPilihBibit.setOnClickListener {
             val intent = Intent(this, BibitActivity::class.java)
-            intent.putExtra("lahan_id", lahan_id)
+            intent.putExtra(LAHAN_ID, lahan_id)
             startActivity(intent)
         }
     }
@@ -191,16 +191,37 @@ class DetailLahanActivity : AppCompatActivity() {
             updateUI_StatusTanamPre(lahanId)
         } else {
             when (status) {
-                "plan" -> updateUI_StatusTanamPlan(token, lahanDetail, progressBar)
-                "exec" -> updateUI_StatusTanamExec(token, lahanDetail, progressBar)
+                STATUS_PLAN -> updateUI_StatusTanamPlan(token, lahanDetail, progressBar)
+                STATUS_EXEC -> updateUI_StatusTanamExec(token, lahanDetail, progressBar)
                 else -> updateUI_StatusTanamPre(lahanId)
             }
         }
     }
 
-    private fun updateUI_IoTSection() {
+    private fun updateUI_HubungkanIoT(lahanId: String) {
+        binding.iotSectionDetailLahan.buttonHubungkanIot.visibility =
+            View.VISIBLE
+        iotSectionDetailLahanBinding.buttonHubungkanIot.setOnClickListener {
+            val intent = Intent(this, ScanQRActivity::class.java)
+            intent.putExtra(LAHAN_ID, lahanId)
+            resultLauncher.launch(intent)
+        }
+    }
+
+    private fun updateUI_IoTSection(iotId: String, token: String?, lahanId: String) {
         binding.iotSectionDetailLahan.buttonHubungkanIot.visibility = View.GONE
         binding.iotSectionDetailLahan.infoCard.visibility = View.VISIBLE
+
+        actionGetHasilIoT(iotId, token)
+
+        binding.iotSectionDetailLahan.buttonReload.setOnClickListener {
+            actionGetHasilIoT(iotId, token)
+            recreate()
+        }
+
+        binding.iotSectionDetailLahan.buttonDelete.setOnClickListener {
+            actionResetIoT(token, iotId, lahanId)
+        }
     }
 
     private fun updateUI_StatusTanamPre(lahanId: String) {
@@ -233,7 +254,7 @@ class DetailLahanActivity : AppCompatActivity() {
 
         binding.preTanamDetailLahan.buttonRiwayatTanam.setOnClickListener {
             Intent(this, RiwayatTanamActivity::class.java).also {
-                it.putExtra("lahan_id", lahanId)
+                it.putExtra(LAHAN_ID, lahanId)
                 startActivity(it)
                 finish()
             }
@@ -322,6 +343,66 @@ class DetailLahanActivity : AppCompatActivity() {
                 progressBar = progressBar
             )
         }
+
+        binding.execTanamDetailLahan.buttonTambahAktivitas.setOnClickListener {
+            val intent = Intent(this, TambahAktivitasActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun actionGetHasilIoT(iotId: String, token: String?) {
+        iotViewModel.getHasilIoT(
+            iotId = iotId,
+            token = token,
+        )
+
+        iotViewModel.hasilIoTResponse.observe(this) { resource ->
+            when (resource) {
+                is Resource.Success -> {
+                    val suhu = resource.data?.data?.suhu
+                    val kelembabanUdara = resource.data?.data?.kelembaban_udara
+
+                    binding.iotSectionDetailLahan.suhuValue.text =
+                        getString(R.string.suhu_celcius, suhu.toString())
+                    binding.iotSectionDetailLahan.kelembapanValue.text =
+                        getString(R.string.kelembapan_persen, kelembabanUdara.toString())
+                }
+
+                is Resource.Error -> {
+                    showPrimaryToast(
+                        getString(R.string.kesalahan_memuat_data),
+                        false
+                    )
+                    recreate()
+                }
+            }
+        }
+    }
+
+    private fun actionResetIoT(token: String?, iotId: String, lahanId: String) {
+        iotViewModel.resetIoT(
+            token = token,
+            iotId = iotId,
+        )
+
+        iotViewModel.iotRegResResponse.observe(this) { resource ->
+            when (resource) {
+                is Resource.Success -> {
+                    showPrimaryToast(
+                        getString(R.string.data_iot_berhasil_terhapus)
+                    )
+                    ioTPreference.deleteIot(lahanId)
+                    recreate()
+                }
+
+                is Resource.Error -> {
+                    showPrimaryToast(
+                        getString(R.string.kesalahan_memuat_data),
+                        false
+                    )
+                }
+            }
+        }
     }
 
     private fun deleteLahanAction(token: String, lahan_id: String, progressBar: Dialog) {
@@ -331,10 +412,12 @@ class DetailLahanActivity : AppCompatActivity() {
             .setPositiveButton(getString(R.string.ya)) { _, _ ->
                 lahanViewModel.deleteLahan(token, lahan_id)
 
-                progressBar.show()
-
                 lahanViewModel.lahanState.observe(this) { state ->
                     when (state) {
+                        is LahanViewModel.LahanState.Loading -> {
+                            progressBar.show()
+                        }
+
                         is LahanViewModel.LahanState.Success<*> -> {
                             when (state.data) {
                                 is Resource.Success<*> -> {
@@ -426,9 +509,9 @@ class DetailLahanActivity : AppCompatActivity() {
             { _, year, month, dayOfMonth ->
                 val calendar = Calendar.getInstance()
                 calendar.set(year, month, dayOfMonth)
-                val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val format = SimpleDateFormat(FORMAT_DATE, Locale.getDefault())
                 val dateString = format.format(calendar.time)
-                formExecDialogBinding.tanggalTanamInput.setText(dateString)
+                formExecDialogBinding.tanggalTanamInput.setText(formatDate(dateString))
             },
             Calendar.getInstance().get(Calendar.YEAR),
             Calendar.getInstance().get(Calendar.MONTH),
@@ -442,7 +525,7 @@ class DetailLahanActivity : AppCompatActivity() {
         formExecDialogBinding.btnSimpan.setOnClickListener {
             progressBar.show()
             val jarak = formExecDialogBinding.jarakInput.text.toString().toIntOrNull()
-            val tanggalTanam = formExecDialogBinding.tanggalTanamInput.text.toString()
+            val tanggalTanam = formatDateToAPI(formExecDialogBinding.tanggalTanamInput.text.toString())
 
             tanamViewModel.statusTanamExec(
                 token = token,
@@ -461,6 +544,8 @@ class DetailLahanActivity : AppCompatActivity() {
                     is Resource.Error -> {
                         progressBar.dismiss()
                         showPrimaryToast(getString(R.string.gagal_memperbarui_status_tanam), false)
+                        Log.d("Gagal", resource.exception?.message.toString())
+
                     }
                 }
             }
@@ -497,9 +582,9 @@ class DetailLahanActivity : AppCompatActivity() {
             { _, year, month, dayOfMonth ->
                 val calendar = Calendar.getInstance()
                 calendar.set(year, month, dayOfMonth)
-                val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val format = SimpleDateFormat(FORMAT_DATE, Locale.getDefault())
                 val dateString = format.format(calendar.time)
-                formCloseDialogBinding.tanggalPanenInput.setText(dateString)
+                formCloseDialogBinding.tanggalPanenInput.setText(formatDate(dateString))
             },
             Calendar.getInstance().get(Calendar.YEAR),
             Calendar.getInstance().get(Calendar.MONTH),
@@ -513,7 +598,7 @@ class DetailLahanActivity : AppCompatActivity() {
         formCloseDialogBinding.btnSimpan.setOnClickListener {
             progressBar.show()
             val jumlahPanen = formCloseDialogBinding.jumlahPanenInput.text.toString().toIntOrNull()
-            val tanggalPanen = formCloseDialogBinding.tanggalPanenInput.text.toString()
+            val tanggalPanen = formatDateToAPI(formCloseDialogBinding.tanggalPanenInput.text.toString())
             val hargaPanen = formCloseDialogBinding.hargaPanenInput.text.toString().toIntOrNull()
 
             tanamViewModel.statusTanamClose(
@@ -569,5 +654,12 @@ class DetailLahanActivity : AppCompatActivity() {
         return formCloseDialogBinding.tanggalPanenInput.text.toString().isNotEmpty() &&
                 formCloseDialogBinding.jumlahPanenInput.text.toString().isNotEmpty() &&
                 formCloseDialogBinding.hargaPanenInput.text.toString().isNotEmpty()
+    }
+
+    companion object {
+        private const val LAHAN_ID = "lahan_id"
+        private const val STATUS_PLAN = "plan"
+        private const val STATUS_EXEC = "exec"
+        private const val FORMAT_DATE = "yyyy-MM-dd"
     }
 }

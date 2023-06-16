@@ -222,8 +222,7 @@
                         android:layout_marginBottom="10dp"
                         android:justificationMode="inter_word"
                         android:text="@string/rekomendasi_jadwal_1_7"
-                        android:textColor="@color/white"
-                        tools:targetApi="o" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
             </LinearLayout>

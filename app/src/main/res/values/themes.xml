@@ -55,13 +55,6 @@
     </style>
 
     <!-- Body Bold Styles -->
-    <style name="BodyTinyBold" parent="BodyTiny">
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="BodySmallBold" parent="BodySmall">
-        <item name="android:textStyle">bold</item>
-    </style>
 
     <style name="BodyMediumBold" parent="BodyMedium">
         <item name="android:textStyle">bold</item>
@@ -98,26 +91,12 @@
     </style>
 
     <!-- Heading Styles -->
-    <style name="HeadingSmall" parent="Heading">
-        <item name="android:textSize">22sp</item>
-    </style>
-
-    <style name="HeadingMedium" parent="Heading">
-        <item name="android:textSize">24sp</item>
-    </style>
 
     <style name="HeadingLarge" parent="Heading">
         <item name="android:textSize">26sp</item>
     </style>
 
     <!-- Heading Bold Styles -->
-    <style name="HeadingSmallBold" parent="HeadingSmall">
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="HeadingMediumBold" parent="HeadingMedium">
-        <item name="android:textStyle">bold</item>
-    </style>
 
     <style name="HeadingLargeBold" parent="HeadingLarge">
         <item name="android:textStyle">bold</item>

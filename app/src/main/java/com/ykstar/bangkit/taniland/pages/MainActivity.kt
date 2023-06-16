@@ -71,7 +71,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnMenuTambah.setOnClickListener(){
+//        if (intent.getStringExtra("menu") == "menuLahan") {
+//            navController.navigate(R.id.navigation_lahan)
+//        }
+
+        binding.btnMenuTambah.setOnClickListener {
             val intent = Intent(this, TambahLahanActivity::class.java)
             startActivity(intent)
         }

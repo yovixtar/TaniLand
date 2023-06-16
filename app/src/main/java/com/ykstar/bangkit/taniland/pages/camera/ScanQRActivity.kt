@@ -1,10 +1,10 @@
 package com.ykstar.bangkit.taniland.pages.camera
 
-import android.app.Activity
-import android.content.Intent
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.ResultPoint
 import com.journeyapps.barcodescanner.BarcodeCallback
@@ -12,12 +12,20 @@ import com.journeyapps.barcodescanner.BarcodeResult
 import com.ykstar.bangkit.taniland.R
 import com.ykstar.bangkit.taniland.databinding.ActivityScanQrBinding
 import com.ykstar.bangkit.taniland.preferences.IoTPreference
+import com.ykstar.bangkit.taniland.preferences.UserPreference
+import com.ykstar.bangkit.taniland.utils.Resource
 import com.ykstar.bangkit.taniland.utils.showPrimaryToast
+import com.ykstar.bangkit.taniland.viewmodels.IoTViewModel
 
 class ScanQRActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScanQrBinding
-    private  lateinit var ioTPreference: IoTPreference
+    private lateinit var ioTPreference: IoTPreference
+    private lateinit var userPreference: UserPreference
+
+    private val iotViewModel: IoTViewModel by viewModels()
+
+    private lateinit var progressDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,21 +33,44 @@ class ScanQRActivity : AppCompatActivity() {
         binding = ActivityScanQrBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ioTPreference = IoTPreference(this)
+        progressDialog = Dialog(this)
+        progressDialog.setContentView(R.layout.dialog_progress)
+        progressDialog.setCancelable(false)
+        progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val lahanId = intent.getStringExtra("lahan_id").toString()
+        ioTPreference = IoTPreference(this)
+        userPreference = UserPreference(this)
+
+        val token = userPreference.getToken()
+        val lahanId = intent.getStringExtra(LAHAN_ID).toString()
 
         binding.barcodeView.decodeSingle(object : BarcodeCallback {
             override fun barcodeResult(result: BarcodeResult) {
-                if (ioTPreference.saveIot(lahanId, result.text)){
-                    val intent = Intent()
-                    intent.putExtra("SCAN_IOT_ID", result.text)
-                    setResult(Activity.RESULT_OK, intent)
-                    showPrimaryToast(getString(R.string.berhasil_menghubungkan_iot_ke_lahan))
-                    finish()
-                }else {
-                    showPrimaryToast(getString(R.string.iot_tool_sudah_terdaftar_pada_lahan_anda), false)
-                    recreate()
+                progressDialog.show()
+                iotViewModel.registIoT(
+                    token = token,
+                    iotId = result.text,
+                    lahanId = lahanId,
+                )
+
+                iotViewModel.iotRegResResponse.observe(this@ScanQRActivity) { resource ->
+                    when (resource) {
+                        is Resource.Success -> {
+                            if (ioTPreference.saveIot(lahanId, result.text)) {
+                                showPrimaryToast(getString(R.string.berhasil_menghubungkan_iot_ke_lahan))
+                                progressDialog.dismiss()
+                                finish()
+                            }
+                        }
+
+                        is Resource.Error -> {
+                            progressDialog.dismiss()
+                            showPrimaryToast(
+                                getString(R.string.iot_tool_sudah_terdaftar_pada_lahan_lain),
+                                false
+                            )
+                        }
+                    }
                 }
             }
 
@@ -55,5 +86,9 @@ class ScanQRActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         binding.barcodeView.pause()
+    }
+
+    companion object {
+        private const val LAHAN_ID = "lahan_id"
     }
 }

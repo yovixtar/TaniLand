@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="kategori_aktivitas">
+        <item>Perawatan</item>
+        <item>Penanaman</item>
+        <item>Pemupukan</item>
+        <item>Penanganan_hama</item>
+        <item>Pra Panen</item>
+    </array>
+
+    <array name="jenis_pupuk">
+        <item>Urea</item>
+        <item>SP36</item>
+        <item>KCL</item>
+        <item>Urea Majemuk</item>
+        <item>SP36 Majemuk</item>
+        <item>KCL Majemuk</item>
+    </array>
+</resources>

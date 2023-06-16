@@ -47,10 +47,13 @@ class LahanFragment : Fragment() {
         if (!InternetActive.isOnline(requireContext())) {
             InternetActive.showNoInternetDialog(requireContext())
         } else {
-            progressDialog.show()
             userPreferences.getToken()?.let { viewModel.getLahanData(it) }
             viewModel.lahanState.observe(viewLifecycleOwner) { state ->
                 when (state) {
+                    is LahanViewModel.LahanState.Loading -> {
+                        progressDialog.show()
+                    }
+
                     is LahanViewModel.LahanState.Success<*> -> {
                         when (val resource = state.data) {
                             is Resource.Success<*> -> {
@@ -62,16 +65,15 @@ class LahanFragment : Fragment() {
                                             layoutManager = LinearLayoutManager(requireContext())
                                             adapter = LahanAdapter(data.data)
                                         }
-                                        progressDialog.dismiss()
                                     }
                                 }
                             }
 
-                            is Resource.Error<*> -> {
-
+                            is LahanViewModel.LahanState.Error -> {
                                 progressDialog.dismiss()
                             }
                         }
+                        progressDialog.dismiss()
                     }
 
                     is LahanViewModel.LahanState.Error -> {

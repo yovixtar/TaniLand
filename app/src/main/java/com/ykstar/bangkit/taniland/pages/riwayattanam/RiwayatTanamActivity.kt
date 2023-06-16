@@ -34,7 +34,7 @@ class RiwayatTanamActivity : AppCompatActivity() {
         userPreferences = UserPreference(this)
         viewModel = ViewModelProvider(this)[TanamViewModel::class.java]
 
-        binding.backButton.setOnClickListener() {
+        binding.backButton.setOnClickListener {
             finish()
         }
 
@@ -43,7 +43,7 @@ class RiwayatTanamActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val lahanId = intent.getStringExtra("lahan_id").toString()
+        val lahanId = intent.getStringExtra(LAHAN_ID).toString()
 
         if (!InternetActive.isOnline(this)) {
             InternetActive.showNoInternetDialog(this)
@@ -85,6 +85,10 @@ class RiwayatTanamActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    companion object {
+        private const val LAHAN_ID = "lahan_id"
     }
 
 }

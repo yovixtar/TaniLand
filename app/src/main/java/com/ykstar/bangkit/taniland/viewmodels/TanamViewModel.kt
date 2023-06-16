@@ -29,35 +29,40 @@ class TanamViewModel : ViewModel() {
         token: String?,
         bibitId: String,
         lahanId: String
-    ) =
+    ) {
         viewModelScope.launch {
             _statusTanamResponseState.value =
                 tanamRepository.statusTanamPlan(token, bibitId, lahanId)
         }
+    }
 
     fun statusTanamExec(
         token: String?, id: String?,
         jarak: Int?,
         tanggal_tanam: String?
-    ) =
+    ) {
         viewModelScope.launch {
             _statusTanamResponseState.value =
                 tanamRepository.statusTanamExec(token, id, jarak, tanggal_tanam)
         }
+    }
 
     fun statusTanamClose(
         token: String?, id: String?,
         tanggalPanen: String?,
         jumlahPanen: Int?,
         hargaPanen: Int?,
-    ) =
+    ) {
         viewModelScope.launch {
             _statusTanamResponseState.value =
                 tanamRepository.statusTanamClose(token, id, tanggalPanen, jumlahPanen, hargaPanen)
         }
+    }
 
-    fun deleteTanam(token: String?, tanamId: String) = viewModelScope.launch {
-        _deleteTanamResponseState.value = tanamRepository.deleteTanam(token, tanamId)
+    fun deleteTanam(token: String?, tanamId: String) {
+        viewModelScope.launch {
+            _deleteTanamResponseState.value = tanamRepository.deleteTanam(token, tanamId)
+        }
     }
 
     fun getRiwayatTanam(token: String, lahanId: String) {

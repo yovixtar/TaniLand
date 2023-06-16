@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="30dp">
@@ -13,24 +12,24 @@
         android:backgroundTint="@color/green_variant"
         android:text="@string/hubungkan_iot"
         android:textColor="@color/white"
+        android:visibility="gone"
         app:cornerRadius="10dp"
         app:elevation="5dp"
-        app:strokeColor="@android:color/transparent"
-        android:visibility="gone"
-        app:rippleColor="@null" />
+        app:rippleColor="@null"
+        app:strokeColor="@android:color/transparent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/info_card"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_hubungkan_iot"
         android:layout_marginBottom="15dp"
         android:backgroundTint="@color/white"
-        app:cardElevation="5dp"
+        android:visibility="gone"
         app:cardCornerRadius="10dp"
-        app:strokeColor="@android:color/transparent"
-        app:rippleColor="@null">
+        app:cardElevation="5dp"
+        app:rippleColor="@null"
+        app:strokeColor="@android:color/transparent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -47,9 +46,9 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="2">
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal">
 
                     <TextView
                         android:id="@+id/suhu_label"
@@ -63,16 +62,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/suhu_label"
-                        android:textSize="30sp"
-                        android:textColor="@color/dark" />
+                        android:textColor="@color/dark"
+                        android:textSize="25sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="2">
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal">
 
                     <TextView
                         android:id="@+id/kelembapan_label"
@@ -86,8 +85,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/kelembapan_label"
-                        android:textSize="30sp"
-                        android:textColor="@color/dark" />
+                        android:textColor="@color/dark"
+                        android:textSize="25sp" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -101,20 +100,21 @@
                         android:id="@+id/button_reload"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
                         android:background="@drawable/rounded_button_back"
-                        android:src="@drawable/baseline_360_24"
-                        android:contentDescription="@string/reload_button" />
+                        android:backgroundTint="@color/green_variant"
+                        android:contentDescription="@string/reload_button"
+                        android:padding="8dp"
+                        android:src="@drawable/baseline_360_24" />
 
                     <ImageButton
                         android:id="@+id/button_delete"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:padding="8dp"
                         android:background="@drawable/rounded_button_delete"
-                        android:src="@drawable/baseline_delete_24"
-                        android:contentDescription="@string/button_delete" />
+                        android:contentDescription="@string/button_delete"
+                        android:padding="8dp"
+                        android:src="@drawable/baseline_delete_24" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

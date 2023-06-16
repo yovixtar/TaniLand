@@ -38,9 +38,9 @@ class BibitActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[BibitViewModel::class.java]
         tanamViewModel = ViewModelProvider(this)[TanamViewModel::class.java]
 
-        val lahan_id = intent.getStringExtra("lahan_id").toString()
+        val lahan_id = intent.getStringExtra(LAHAN_ID).toString()
 
-        binding.backButton.setOnClickListener(){
+        binding.backButton.setOnClickListener {
             finish()
         }
 
@@ -96,7 +96,7 @@ class BibitActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     progressDialog.dismiss()
                     Intent(this, DetailLahanActivity::class.java).also {
-                        it.putExtra("lahan_id", lahan_id)
+                        it.putExtra(LAHAN_ID, lahan_id)
                         startActivity(it)
                         finish()
                     }
@@ -108,5 +108,9 @@ class BibitActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    companion object {
+        private const val LAHAN_ID = "lahan_id"
     }
 }

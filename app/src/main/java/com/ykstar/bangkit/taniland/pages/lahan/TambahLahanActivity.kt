@@ -81,7 +81,7 @@ class TambahLahanActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.O
 
         setupTextWatchers()
 
-        binding.backButton.setOnClickListener(){
+        binding.backButton.setOnClickListener {
             finish()
         }
     }
@@ -93,7 +93,6 @@ class TambahLahanActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.O
         binding.buttonSimpan.isEnabled = false
 
         binding.buttonSimpan.setOnClickListener {
-            progressDialog.show()
 
             val token = userPreferences.getToken()
             viewModel.tambahLahan(
@@ -109,6 +108,9 @@ class TambahLahanActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.O
 
             viewModel.lahanState.observe(this) { state ->
                 when (state) {
+                    is LahanViewModel.LahanState.Loading -> {
+                        progressDialog.show()
+                    }
                     is LahanViewModel.LahanState.Success<*> -> {
                         when (state.data) {
                             is Resource.Success<*> -> {
@@ -120,11 +122,13 @@ class TambahLahanActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.O
                                     finish()
                                 }
                             }
+
                             is Resource.Error<*> -> {
-                                showPrimaryToast(getString(R.string.gagal_menambahkan_lahan), false)
                                 progressDialog.dismiss()
+                                showPrimaryToast(getString(R.string.gagal_menambahkan_lahan), false)
                             }
                         }
+                        progressDialog.dismiss()
                     }
 
                     is LahanViewModel.LahanState.Error -> {

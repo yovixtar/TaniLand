@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ykstar.bangkit.taniland.R
 import com.ykstar.bangkit.taniland.models.RiwayatTanamList
+import com.ykstar.bangkit.taniland.utils.formatDate
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -52,14 +53,6 @@ class RiwayatTanamAdapter(
         holder.lihatLaporanButton.setOnClickListener {
             onLihatLaporanClickListener(riwayatTanam)
         }
-    }
-
-    private fun formatDate(dateString: String): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale("in", "ID"))
-
-        val date: Date = inputFormat.parse(dateString) as Date
-        return outputFormat.format(date)
     }
 
     override fun getItemCount() = riwayatTanamList.size

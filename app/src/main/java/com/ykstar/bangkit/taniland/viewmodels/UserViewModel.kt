@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ykstar.bangkit.taniland.models.AuthRequest
 import com.ykstar.bangkit.taniland.models.AuthResponse
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.repositories.UserRepository
@@ -18,9 +19,9 @@ class UserViewModel(context: Context) : ViewModel() {
     val authenticationState: LiveData<Resource<AuthResponse>>
         get() = _authenticationState
 
-    fun authenticate(username: String?, email: String?) {
+    fun authenticate(authdata: AuthRequest) {
         viewModelScope.launch {
-            val resource = userRepository.authenticate(username, email)
+            val resource = userRepository.authenticate(authdata)
             _authenticationState.value = resource
             if (resource is Resource.Success) {
                 resource.data?.data?.id?.let { userPreferences.saveUserID(it) }

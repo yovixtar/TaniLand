@@ -9,11 +9,10 @@
     <ImageView
         android:id="@+id/banner_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="250dp"
         android:contentDescription="@string/banner_image_plan_premium"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg_plan_premium" />
+        android:src="@drawable/mockup_premium_plan" />
 
     <ImageButton
         android:id="@+id/close_button"
@@ -21,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-        android:background="@drawable/rounded_button_delete"
+        android:backgroundTint="@android:color/transparent"
         android:contentDescription="@string/close_button_plan_premium"
         android:padding="8dp"
         android:src="@drawable/baseline_close_24" />

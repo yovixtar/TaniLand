@@ -19,6 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ykstar.bangkit.taniland.R
 import com.ykstar.bangkit.taniland.databinding.FragmentProfileBinding
+import com.ykstar.bangkit.taniland.pages.premium.PlanPremiumActivity
 import com.ykstar.bangkit.taniland.pages.startup.AuthActivity
 import com.ykstar.bangkit.taniland.preferences.UserPreference
 import com.ykstar.bangkit.taniland.utils.InternetActive
@@ -54,6 +55,11 @@ class ProfileFragment : Fragment() {
         progressDialog.setCancelable(false)
         progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        binding.buttonLaporan.setOnClickListener {
+            val intent = Intent(requireContext(), PlanPremiumActivity::class.java)
+            startActivity(intent)
+        }
+
         if (!InternetActive.isOnline(requireContext())) {
             InternetActive.showNoInternetDialog(requireContext())
         } else {
@@ -64,6 +70,8 @@ class ProfileFragment : Fragment() {
                     is Resource.Success -> {
                         resource.data?.let { userModel ->
                             binding.username.text = userModel.username
+                            binding.statusUser.text =
+                                if (userModel.premium) getString(R.string.premium) else getString(R.string.standard)
                             binding.email.text = userModel.email
                             Glide.with(this)
                                 .load(userModel.photo)

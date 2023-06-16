@@ -11,6 +11,11 @@ data class UserModel(
     val lasted_login: String
 )
 
+data class AuthRequest(
+    val username: String?,
+    val email: String?
+)
+
 data class AuthResponse(
     val error: Boolean,
     val message: String,

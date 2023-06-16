@@ -13,6 +13,7 @@ class LahanViewModel : ViewModel() {
     private val lahanRepository = LahanRepository()
 
     sealed class LahanState {
+        object Loading : LahanState()
         data class Success<T>(val data: T) : LahanState()
         data class Error(val message: String) : LahanState()
     }
@@ -21,6 +22,7 @@ class LahanViewModel : ViewModel() {
     val lahanState: LiveData<LahanState> get() = _lahanState
 
     fun tambahLahan(token: String?, lahan: LahanRequest) = viewModelScope.launch {
+        _lahanState.value = LahanState.Loading
         val resource = lahanRepository.tambahLahan(token, lahan)
         if (resource is Resource.Success) {
             _lahanState.value = LahanState.Success(resource)
@@ -31,6 +33,7 @@ class LahanViewModel : ViewModel() {
 
     fun getLahanData(token: String) {
         viewModelScope.launch {
+            _lahanState.value = LahanState.Loading
             val resource = lahanRepository.getLahan(token)
             if (resource is Resource.Success) {
                 _lahanState.value = LahanState.Success(resource)
@@ -42,6 +45,7 @@ class LahanViewModel : ViewModel() {
 
     fun getLahanDetail(id: String, token: String) = viewModelScope.launch {
         viewModelScope.launch {
+            _lahanState.value = LahanState.Loading
             val resource = lahanRepository.getLahanDetail(id, token)
             if (resource is Resource.Success) {
                 _lahanState.value = LahanState.Success(resource)
@@ -52,6 +56,7 @@ class LahanViewModel : ViewModel() {
     }
 
     fun deleteLahan(token: String?, lahan_id: String) = viewModelScope.launch {
+        _lahanState.value = LahanState.Loading
         val resource = lahanRepository.deleteLahan(token, lahan_id)
         if (resource is Resource.Success) {
             _lahanState.value = LahanState.Success(resource)
